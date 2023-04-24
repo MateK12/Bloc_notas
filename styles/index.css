@@ -3,6 +3,9 @@
     
 
 }
+a{
+    text-decoration: none;
+}
 :root {
     --bg-color: #88D9E6 ;
     --celeste-claro:#C5FFFD;
@@ -31,10 +34,12 @@
     border-width: 1px;
     position: relative;
     left: 30%;
+    background-color:var(--bg-color);
 }
 #boton_submit{
     position: relative;
     left: 40%;
+    background-color: var(--bg-color);
 }
 #titulo{
     position: relative;
