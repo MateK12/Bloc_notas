@@ -14,6 +14,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import *
 from flask_cors import CORS
 from flask_cors import CORS
+from werkzeug.security import generate_password_hash
 
 base = declarative_base()           #Alchemy
 motor = create_engine("mysql://root:@localhost/bloc_notas")  #Alchemy
@@ -53,8 +54,35 @@ app.config['MYSQL_DB'] = 'bloc_notas'
 
 mysql = MySQL(app)
 
-@app.route("/Agregar tareas", methods=["POST","GET"])           #Iniciar sesion
-def Inicio_sesion():
+@app.route("/crear_cuenta",methods=["POST","GET"])
+def crear_cuenta():
+    print("llego")
+    consulta_ruta1 = sesion1.query(User).filter(
+        User.usuario == request.json["usuario_value"],
+        User.contraseña == request.json["contraseña_value"]
+    ).first()
+    print("datos",consulta_ruta1)
+    if consulta_ruta1 == None:
+        hash_password = generate_password_hash(request.json["contraseña_value"],method="sha256")
+        sesion1.add(User(usuario = request.json["usuario_value"], contraseña = hash_password))
+        sesion1.commit()
+        print("Crea la cuenta")
+        msg = {
+            "mensaje":"cuenta creada",
+            "cuenta":"nueva"
+        }
+        return msg
+    elif consulta_ruta1 !=None:
+        msg = {
+            "mensaje":"Cuenta existente",
+            "cuenta":"existente"
+        }
+        print("cuenta existente")
+        return msg
+    else:
+        print("falloooo")
+@app.route("/Agregar_tareas", methods=["POST","GET"])           #Iniciar sesion
+def agregar_tareas():
     pass
    
 if __name__ == '__main__':
