@@ -1,36 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/bootstrap.min (4).css">
-    <link rel="stylesheet" href="./styles/index.css">
-    <title>Inicio de sesion</title>
+	<title>Sign In</title>
+	<link rel="stylesheet" type="text/css" href="./styles/index.css">
 </head>
 <body>
-    <h1 id="titulo">Bienvenido de vuelta</h1>
-    <div id="caja">
-        <br>
-          <div class="input">
-            <label for="exampleInputEmail1" class="input" >Email address</label>
-            <br>
-            <br>
-            <input type="email" class="input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-          </div>
-          <br>
-          <div class="input">
-            <label for="exampleInputPassword1" class="input" >Password</label>
-            <br>
-            <br>
-            <input type="password" class="input" id="exampleInputPassword1" placeholder="Password">
-          </div>
-          <br>
-        </fieldset>
-        <button type="submit" id="boton_submit" class="input">Iniciar Sesion</button>
-        <br>
-        <a href="./templates/crear_cuenta.html">¿No tienes una? Crea tu cuenta ahora</a>
-      </fieldset>
-    </div>
+	<div class="container">
+		<h1>Inicio de sesion</h1>
+		<form>
+			<label for="username">Username:</label>
+			<input type="text" id="usuario" name="username" required>
+
+			<label for="password">Password:</label>
+			<input type="password" id="contraseña" name="password" required>
+
+			<input type="submit" id="boton_submit" value="Sign In">
+		</form>
+    <br>
+    <a href="./templates/crear_cuenta.html">¿No tiene un cuenta? Creala aqui</a>
+	</div>
+  <script src="./scripts/index.js"></script>
 </body>
 </html>

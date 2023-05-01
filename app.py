@@ -81,9 +81,33 @@ def crear_cuenta():
         return msg
     else:
         print("falloooo")
+@app.route("/iniciar_sesion",methods=["POST","GET"])
+def iniciar_sesion():
+    consulta_ruta1 = sesion1.query(User).filter(
+            User.usuario == request.json["usuario_value"],
+            User.contraseña == request.json["contraseña_value"]
+        ).first()
+    if consulta_ruta1 != None:
+            print("sesion iniciada")
+            msg = {
+                "autenticacion":True
+            }
+            k = jsonify(msg)
+            return k
+    elif consulta_ruta1 ==None:
+            msg = {
+                "mensaje":"La cuenta no existe",
+                "Autenticacion":False
+            }
+            print("No tienes cuenta")
+            k=jsonify(msg)
+            return k
+    else:
+            return("falloooo")
 @app.route("/Agregar_tareas", methods=["POST","GET"])           #Iniciar sesion
 def agregar_tareas():
     pass
+
    
 if __name__ == '__main__':
     #base.metadata.drop_all(motor)
