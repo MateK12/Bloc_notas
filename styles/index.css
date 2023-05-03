@@ -31,6 +31,7 @@ input[type="text"], input[type="password"] {
 	border-radius: 5px;
 	border: none;
 	margin-bottom: 20px;
+	border-style: solid;
 }
 
 input[type="submit"] {

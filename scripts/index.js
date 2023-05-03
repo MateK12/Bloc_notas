@@ -1,8 +1,8 @@
 let API = "http://127.0.0.1:5000";
 let boton = document.getElementById("boton_submit");
 let usuario = document.getElementById("usuario");
-let contraseña = document.getElementById("Contraseña");
-
+let contraseña = document.getElementById("contraseña");
+let mensaje = document.getElementById("mensaje");
 boton.addEventListener("click",async function  handle_submit(e) {
     e.preventDefault()
     let usuario_value = usuario.value;
@@ -26,7 +26,7 @@ boton.addEventListener("click",async function  handle_submit(e) {
         window.location.href= "../templates/Dashboard.html"
     }
     else{
-        
+        mensaje.innerHTML = "Cuenta no existente"
     }
   })
   

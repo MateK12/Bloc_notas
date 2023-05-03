@@ -68,17 +68,18 @@ def crear_cuenta():
         sesion1.commit()
         print("Crea la cuenta")
         msg = {
-            "mensaje":"cuenta creada",
-            "cuenta":"nueva"
+            "mensaje":"La cuenta ha sido creada con exito",
+            "creacion":True
         }
         return msg
     elif consulta_ruta1 !=None:
         msg = {
-            "mensaje":"Cuenta existente",
-            "cuenta":"existente"
-        }
+                "mensaje":"La cuenta ya existe",
+                "creacion":False
+            }
         print("cuenta existente")
-        return msg
+        jsonified_msg = jsonify(msg)
+        return jsonified_msg
     else:
         print("falloooo")
 @app.route("/iniciar_sesion",methods=["POST","GET"])
@@ -97,7 +98,7 @@ def iniciar_sesion():
     elif consulta_ruta1 ==None:
             msg = {
                 "mensaje":"La cuenta no existe",
-                "Autenticacion":False
+                "autenticacion":False
             }
             print("No tienes cuenta")
             k=jsonify(msg)
