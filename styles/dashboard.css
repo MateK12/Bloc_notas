@@ -1,0 +1,47 @@
+body{
+	margin:0;
+	/* color:#6a6f8c; */
+	background:#c8c8c8;
+	font:600 16px/18px 'Open Sans',sans-serif;
+}
+/* *,:after,:before{box-sizing:border-box}
+.clearfix:after,.clearfix:before{content:'';display:table}
+.clearfix:after{clear:both;display:block} */
+a{color:inherit;text-decoration:none}
+
+#container{
+    width: 100%;
+    height: 1048px;
+    background:rgba(40,57,101,.9);
+    
+}
+#cont_tareas{
+    background:rgba(40,57,101,.9);
+
+}
+.add{
+    width: 70px;
+    height: 70px;
+    border-radius: 70px;
+    font-size: 30px;
+}
+
+#prueba{
+    display: flex;
+    flex-direction: row;
+    gap: 70vw;
+}
+#cont_titulo{
+    display: flex;
+    justify-content: center;
+}
+#titulo{
+    position: relative;
+    width: 16vw;
+}
+#btn_add{
+    position: fixed;
+    top: 30px;
+  
+    border-radius: 50%;
+}
