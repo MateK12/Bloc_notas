@@ -10,24 +10,38 @@
 <body>
     <header>
         <div class="row">
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" id="cont_titulo">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-6" id="cont_titulo">
                 <h1 id="titulo">Tus notas</h1>
             </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-6" id="cont_titulo">
+                <h1 id="titulo"> </h1>
             </div>
-            <div class="col-xl-6 col-lg-4 col-md-6 col-sm-6" id="cont_titulo">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-6" id="cont_titulo">
                 <button id="btn_add" type="button" class="btn btn-success">+</button>
+                <button id="abrirModal">Abrir Modal</button>
+
             </div>
         </div>
    
     </header>
     <main>
-        <div class="container">
+        <div id class="container">
 
             <div id="task_container" class="row">
     
             </div>
         </div>
+        <h2>Ventana modal</h2>
+
       
+        <!-- Ventana modal, por defecto no visiblel -->
+        <div id="ventanaModal" class="modal">
+          <div class="contenido-modal">
+              <span class="cerrar">&times;</span>
+              <h2>Ventana modal</h2>
+              <p>Esto es el texto de la ventana</p>
+          </div>
+        </div>
     </main>
     <footer>
 
