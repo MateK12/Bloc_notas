@@ -1,22 +1,4 @@
-
-let task_container = document.getElementById("task_container");
-let boton_add = document.getElementById("btn_add");
-function create_task(titulo,descripcion ,importancia,fecha) {
-    let container = document.createElement("div");
-    container.innerHTML = `<div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">${titulo}</h5>
-      <p class="card-text">${descripcion}</p>
-      <h4 class="card-subtitle mb-2 text-body-secondary">${importancia}</h4>
-      <h6 class="card-subtitle mb-2 text-body-secondary">${fecha}</h6>
-      <button type="button" class="btn btn-info">Editar</button>
-      <button type="button" class="btn btn-danger">Eliminar</button>
-      </div>
-  </div>`
-  task_container.appendChild(container);
-}
-boton_add.addEventListener("click",create_task);
-
+let API = "http://127.0.0.1:5000";
 
 // Ventana modal
 var modal = document.getElementById("ventanaModal");
@@ -36,3 +18,66 @@ boton.addEventListener("click",function() {
 span.addEventListener("click",function() {
   modal.style.display = "none";
 });
+
+//Funcion para crear plantilla
+let task_container = document.getElementById("task_container");
+let boton_add = document.getElementById("btn_add");
+function create_task(titulo,descripcion ,importancia,fecha) {
+    let container = document.createElement("div");
+    container.innerHTML = `<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">${titulo}</h5>
+      <p class="card-text">${descripcion}</p>
+      <h4 class="card-subtitle mb-2 text-body-secondary">${importancia}</h4>
+      <h6 class="card-subtitle mb-2 text-body-secondary">${fecha}</h6>
+      <button type="button" class="btn btn-info">Editar</button>
+      <button type="button" class="btn btn-danger">Eliminar</button>
+      </div>
+  </div>`
+  task_container.appendChild(container);
+}
+boton_add.addEventListener("click",create_task);
+
+//DDDDDDDDDDDDD
+let importancia_VM = document.getElementById("importancia_VM");
+let nombre_VM = document.getElementById("nombre_VM");
+let descripcion_VM = document.getElementById("descripcion_VM");
+let btn_VM = document.getElementById("btn_VM");
+
+btn_VM.addEventListener("click",async function  handle_submit(e) {
+  e.preventDefault()
+  let importancia = importancia_VM.value;
+  let nombre = nombre_VM.value;
+  let descripcion = descripcion_VM.value;
+  let id_usuario = localStorage.getItem('id_usuario');
+  const respuesta = await fetch(`${API}/Agregar_tareas`,{
+    method:["POST"],
+    headers:{"Content-Type":"application/json"
+  },
+  body: JSON.stringify ({
+    importancia,
+    nombre,
+    descripcion,
+    id_usuario
+  })
+  })
+  
+      let res = await respuesta.json();
+      console.log(res);
+  if (res.creacion) {
+    for (let i = 0; i < res.nombre.length; i++) {
+    create_task(res.nombre[i],res.descripcion[i],res.importancia[i],res.fecha[i])      
+    }
+  }
+  else{
+      mensaje.innerHTML = "Cuenta no existente"
+  }
+})
+
+//cerrar sesion
+let cerrar_sesion = document.getElementById("btn_CerrarSesion");
+cerrar_sesion.addEventListener("click",()=>{
+  localStorage.removeItem('id_usuario');
+})
+
+

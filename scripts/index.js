@@ -22,11 +22,13 @@ boton.addEventListener("click",async function  handle_submit(e) {
     
         let res = await respuesta.json();
         console.log(res);
+
     if (res.autenticacion) {
-        window.location.href= "../templates/Dashboard.html"
+      localStorage.setItem('id_usuario',res.user_id);
+      window.location.href= "../templates/Dashboard.html"
+
     }
     else{
-        mensaje.innerHTML = "Cuenta no existente"
+        mensaje.innerHTML = "Error en las credenciales"
     }
   })
-  

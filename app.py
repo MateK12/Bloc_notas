@@ -18,7 +18,7 @@ from werkzeug.security import generate_password_hash
 
 base = declarative_base()           #Alchemy
 motor = create_engine("mysql://root:@localhost/bloc_notas")  #Alchemy
-
+db= sqlalchemy
 class User(base):
     __tablename__ = "Usuarios"
     id = Column(Integer(), primary_key = True)
@@ -88,10 +88,15 @@ def iniciar_sesion():
             User.usuario == request.json["usuario_value"],
             User.contraseña == request.json["contraseña_value"]
         ).first()
+    consulta = sesion1.query(User).filter(
+        User.usuario == request.json["usuario_value"],
+        User.contraseña == request.json["contraseña_value"]
+    ).all()
     if consulta_ruta1 != None:
             print("sesion iniciada")
             msg = {
-                "autenticacion":True
+                "autenticacion":True,
+                "user_id":consulta[0].id
             }
             k = jsonify(msg)
             return k
@@ -107,7 +112,36 @@ def iniciar_sesion():
             return("falloooo")
 @app.route("/Agregar_tareas", methods=["POST","GET"])           #Iniciar sesion
 def agregar_tareas():
-    pass
+    sesion1.add(Tarea(nombre = request.json["nombre"], descripcion = request.json["descripcion"],
+    importancia = request.json["importancia"], Usuario_id = request.json["id_usuario"],
+    ))
+    consulta = sesion1.query(Tarea).filter(
+            Tarea.Usuario_id == request.json["id_usuario"],
+        ).all()
+    print(len(consulta))
+    sesion1.commit()
+    print("Crea la tarea")
+    nombre_lista= []
+    importancia_lista = []
+    descripcion_lista = []
+    fecha_lista = []
+    for f in range(len(consulta)):
+        nombre_lista.append(consulta[f].nombre)
+        descripcion_lista.append(consulta[f].descripcion)
+        importancia_lista.append(consulta[f].importancia)
+        fecha_lista.append(consulta[f].fecha)
+
+    print(consulta[3].descripcion)
+    msg = {
+            "mensaje":"La tarea ha sido creada con exito",
+            "nombre":nombre_lista,
+            "descripcion": descripcion_lista,
+            "importancia":importancia_lista,
+            "fecha": fecha_lista,
+            "creacion":True
+        }
+
+    return msg
 
    
 if __name__ == '__main__':

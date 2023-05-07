@@ -34,18 +34,13 @@ a{color:inherit;text-decoration:none}
 #cont_titulo{
     display: flex;
     justify-content: center;
+    padding: 30px;
 }
 #titulo{
     position: relative;
     width: 16vw;
 }
-.btn_add{
-    position: fixed;
-    top: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-}
+
 #ventanaModal {
     display: none; /* Por defecto, estará oculto */
     position: fixed; /* Posición fija */
@@ -96,4 +91,18 @@ a{color:inherit;text-decoration:none}
     color: #000;
     text-decoration: none;
     cursor: pointer;
+  }
+  #abrirModal{
+    position: fixed;
+    top: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #28a745;
+  }
+  #btn_add{
+    display: none;
+  }
+  #cont_ventana_modal{
+    height: auto;
   }
