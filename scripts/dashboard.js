@@ -24,7 +24,8 @@ let task_container = document.getElementById("task_container");
 let boton_add = document.getElementById("btn_add");
 function create_task(titulo,descripcion ,importancia,fecha) {
     let container = document.createElement("div");
-    container.innerHTML = `<div class="card" style="width: 18rem;">
+    container.innerHTML = `<div>
+    <div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">${titulo}</h5>
       <p class="card-text">${descripcion}</p>
@@ -33,7 +34,9 @@ function create_task(titulo,descripcion ,importancia,fecha) {
       <button type="button" class="btn btn-info">Editar</button>
       <button type="button" class="btn btn-danger">Eliminar</button>
       </div>
-  </div>`
+  </div>
+  </div> <br>`
+  container.className = "col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12";  
   task_container.appendChild(container);
 }
 boton_add.addEventListener("click",create_task);
@@ -81,3 +84,5 @@ cerrar_sesion.addEventListener("click",()=>{
 })
 
 
+let probar = document.getElementById("probar");
+probar.addEventListener("click",create_task)
