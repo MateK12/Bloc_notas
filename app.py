@@ -14,16 +14,18 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import *
 from flask_cors import CORS
 from flask_cors import CORS
-from werkzeug.security import generate_password_hash
 
-base = declarative_base()           #Alchemy
-motor = create_engine("mysql://root:@localhost/bloc_notas")  #Alchemy
+base = sqlalchemy.orm.declarative_base()           #Alchemy
+motor = create_engine("mysql://root:root@192.168.44.114:3306/bloc_notas")  #Alchemy
 db= sqlalchemy
+connection = motor.raw_connection()
+cur = connection.cursor()
+
 class User(base):
     __tablename__ = "Usuarios"
     id = Column(Integer(), primary_key = True)
     usuario =  Column(String(50), nullable = False, unique = True)       #Base de usuarios
-    contraseña =  Column(String(50), nullable = False, unique = False)
+    contraseña =  Column(String(250), nullable = False, unique = False)
     def __str__(self):
         return self.usuario
     
@@ -63,8 +65,9 @@ def crear_cuenta():
     ).first()
     print("datos",consulta_ruta1)
     if consulta_ruta1 == None:
-        hash_password = generate_password_hash(request.json["contraseña_value"],method="sha256")
-        sesion1.add(User(usuario = request.json["usuario_value"], contraseña = hash_password))
+        # hash_password = bcrypt.generate_password_hash(request.json["contraseña_value"]).decode('utf-8')
+        # print(hash_password)
+        sesion1.add(User(usuario = request.json["usuario_value"], contraseña = request.json["contraseña_value"]))
         sesion1.commit()
         print("Crea la cuenta")
         msg = {
@@ -84,14 +87,16 @@ def crear_cuenta():
         print("falloooo")
 @app.route("/iniciar_sesion",methods=["POST","GET"])
 def iniciar_sesion():
+    # hash_password = bcrypt.generate_password_hash(request.json["contraseña_value"]).decode('utf-8')
     consulta_ruta1 = sesion1.query(User).filter(
             User.usuario == request.json["usuario_value"],
-            User.contraseña == request.json["contraseña_value"]
+            # User.contraseña == hash_password
         ).first()
     consulta = sesion1.query(User).filter(
         User.usuario == request.json["usuario_value"],
         User.contraseña == request.json["contraseña_value"]
     ).all()
+    print("el resultado es",consulta)
     if consulta_ruta1 != None:
             print("sesion iniciada")
             msg = {
@@ -100,7 +105,7 @@ def iniciar_sesion():
             }
             k = jsonify(msg)
             return k
-    elif consulta_ruta1 ==None:
+    elif consulta_ruta1 == None:
             msg = {
                 "mensaje":"La cuenta no existe",
                 "autenticacion":False
@@ -142,7 +147,10 @@ def agregar_tareas():
         }
 
     return msg
-
+dbs = cur.execute("SHOW DATABASES")
+print(dbs)
+# tablas = motor.table_names()
+# print(tablas)
    
 if __name__ == '__main__':
     #base.metadata.drop_all(motor)
