@@ -16,7 +16,7 @@ from passlib.context import CryptContext
 
 
 base = sqlalchemy.orm.declarative_base()           #Alchemy
-motor = create_engine("mysql://root:root@127.0.0.1:3306/bloc_notas")  #Alchemy
+motor = create_engine("mysql://root:root@192.168.44.114:3306/bloc_notas")  #Alchemy
 db= sqlalchemy
 connection = motor.raw_connection()
 cur = connection.cursor()
@@ -132,7 +132,7 @@ def agregar_tareas():
     importancia_lista = []
     descripcion_lista = []
     fecha_lista = []
-    for f in range(1):
+    for f in range(0):
         nombre_lista.append(consulta[f].nombre)
         descripcion_lista.append(consulta[f].descripcion)
         importancia_lista.append(consulta[f].importancia)

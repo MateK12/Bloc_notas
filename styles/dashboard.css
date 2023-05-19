@@ -17,6 +17,7 @@ a{color:inherit;text-decoration:none}
 }
 #task_container2{
     background-color:#7ec4cf;
+    height: fit-content;
 
 }
 .add{
@@ -98,11 +99,32 @@ a{color:inherit;text-decoration:none}
     width: 60px;
     height: 60px;
     border-radius: 50%;
+    transition: all 0.2s ease;
     background-color: #28a745;
   }
+  #abrirModal:hover{
+    background: #67ff8a;
+    color: #000 ;
+  }
+ 
   #btn_add{
     display: none;
   }
   #cont_ventana_modal{
     height: auto;
+  }
+  @media (max-width: 576px) {
+    #abrirModal{
+      position: relative;
+      left: 150px !important;
+      top: 170px;
+      position: fixed;
+    }
+  }
+  @media (max-width: 374px) {
+    #abrirModal{
+      position: relative;
+      left: 190px !important;
+      top: 200px;
+    }
   }
