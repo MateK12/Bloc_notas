@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from operator import mod
 from pyexpat import model
 from flask import Flask, render_template, request,jsonify
@@ -11,16 +10,21 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime, create_engine
 from datetime import datetime
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import *
+from sqlalchemy import ForeignKey
 from flask_cors import CORS
-from flask_cors import CORS
+from passlib.context import CryptContext 
+
 
 base = sqlalchemy.orm.declarative_base()           #Alchemy
-motor = create_engine("mysql://root:root@192.168.44.114:3306/bloc_notas")  #Alchemy
+motor = create_engine("mysql://root:root@127.0.0.1:3306/bloc_notas")  #Alchemy
 db= sqlalchemy
 connection = motor.raw_connection()
 cur = connection.cursor()
-
+Contetxo = CryptContext(
+    schemes=["pbkdf2_sha256"],
+    default = "pbkdf2_sha256",
+    pbkdf2_sha256__default_rounds = 30000
+)
 class User(base):
     __tablename__ = "Usuarios"
     id = Column(Integer(), primary_key = True)
@@ -59,15 +63,10 @@ mysql = MySQL(app)
 @app.route("/crear_cuenta",methods=["POST","GET"])
 def crear_cuenta():
     print("llego")
-    consulta_ruta1 = sesion1.query(User).filter(
-        User.usuario == request.json["usuario_value"],
-        User.contraseña == request.json["contraseña_value"]
-    ).first()
-    print("datos",consulta_ruta1)
-    if consulta_ruta1 == None:
-        # hash_password = bcrypt.generate_password_hash(request.json["contraseña_value"]).decode('utf-8')
-        # print(hash_password)
-        sesion1.add(User(usuario = request.json["usuario_value"], contraseña = request.json["contraseña_value"]))
+    user_exists = sesion1.query(User).filter(User.usuario == request.json["usuario_value"],).first() #Veo si el usuario NO existe
+    if user_exists == None:
+        hashed_psswd = Contetxo.hash(request.json["contraseña_value"]) #Hasheo contraseña
+        sesion1.add(User(usuario = request.json["usuario_value"], contraseña = hashed_psswd)) #Agrego usuario y su contraseña hasheada
         sesion1.commit()
         print("Crea la cuenta")
         msg = {
@@ -75,44 +74,47 @@ def crear_cuenta():
             "creacion":True
         }
         return msg
-    elif consulta_ruta1 !=None:
+    elif user_exists !=None:    #Si el usuario existe
         msg = {
                 "mensaje":"La cuenta ya existe",
                 "creacion":False
             }
         print("cuenta existente")
-        jsonified_msg = jsonify(msg)
-        return jsonified_msg
+        return msg
     else:
         print("falloooo")
 @app.route("/iniciar_sesion",methods=["POST","GET"])
 def iniciar_sesion():
-    # hash_password = bcrypt.generate_password_hash(request.json["contraseña_value"]).decode('utf-8')
-    consulta_ruta1 = sesion1.query(User).filter(
-            User.usuario == request.json["usuario_value"],
-            # User.contraseña == hash_password
-        ).first()
-    consulta = sesion1.query(User).filter(
-        User.usuario == request.json["usuario_value"],
-        User.contraseña == request.json["contraseña_value"]
+    user_exists = sesion1.query(User).filter(User.usuario == request.json["usuario_value"]).first()
+    get_psswd = sesion1.query(User).filter(User.usuario == request.json["usuario_value"]).all() #query para obtener fila compleata de ese usuario
+    get_data = sesion1.query(User).filter(                      
+        User.usuario == request.json["usuario_value"],  #Consulta para traer datos 
     ).all()
-    print("el resultado es",consulta)
-    if consulta_ruta1 != None:
-            print("sesion iniciada")
-            msg = {
+    print("el resultado es",get_data)
+    if user_exists != None:   
+            psswd_gotten = get_psswd[0].contraseña
+            if Contetxo.verify(request.json["contraseña_value"],psswd_gotten):
+                print("sesion iniciada")
+                get_data = sesion1.query(User).filter(User.usuario == request.json["usuario_value"]).all()
+                msg = {
                 "autenticacion":True,
-                "user_id":consulta[0].id
-            }
-            k = jsonify(msg)
-            return k
-    elif consulta_ruta1 == None:
-            msg = {
+                "user_id":get_data[0].id
+                }
+                return msg
+            else:
+                msg = {
+                "autenticacion":False,
+                "mensaje":"contraseña incorrecta"
+                }
+                
+                return msg
+    elif user_exists == None:
+                msg = {
                 "mensaje":"La cuenta no existe",
                 "autenticacion":False
-            }
-            print("No tienes cuenta")
-            k=jsonify(msg)
-            return k
+                }
+                print("No tienes cuenta")
+                return msg
     else:
             return("falloooo")
 @app.route("/Agregar_tareas", methods=["POST","GET"])           #Iniciar sesion
@@ -121,7 +123,7 @@ def agregar_tareas():
     importancia = request.json["importancia"], Usuario_id = request.json["id_usuario"],
     ))
     consulta = sesion1.query(Tarea).filter(
-            Tarea.Usuario_id == request.json["id_usuario"],
+            Tarea.id == request.json["id_usuario"],
         ).all()
     print(len(consulta))
     sesion1.commit()
@@ -130,13 +132,12 @@ def agregar_tareas():
     importancia_lista = []
     descripcion_lista = []
     fecha_lista = []
-    for f in range(len(consulta)):
+    for f in range(1):
         nombre_lista.append(consulta[f].nombre)
         descripcion_lista.append(consulta[f].descripcion)
         importancia_lista.append(consulta[f].importancia)
         fecha_lista.append(consulta[f].fecha)
 
-    print(consulta[3].descripcion)
     msg = {
             "mensaje":"La tarea ha sido creada con exito",
             "nombre":nombre_lista,
@@ -147,11 +148,37 @@ def agregar_tareas():
         }
 
     return msg
-dbs = cur.execute("SHOW DATABASES")
-print(dbs)
-# tablas = motor.table_names()
-# print(tablas)
-   
+@app.route("/Obtener_tareas",methods=["POST","GET"])
+def Obtener_tareas ():
+    get_tasks = sesion1.query(Tarea).filter(
+            Tarea.Usuario_id == request.json["id"],
+        ).all()
+    print(len(get_tasks))
+    sesion1.commit()
+    print("Crea la tarea")
+    id_lista = []
+    nombre_lista= []
+    importancia_lista = []
+    descripcion_lista = []
+    fecha_lista = []
+    for f in range(len(get_tasks)):
+        id_lista.append(get_tasks[f].id)
+        nombre_lista.append(get_tasks[f].nombre)
+        descripcion_lista.append(get_tasks[f].descripcion)
+        importancia_lista.append(get_tasks[f].importancia)
+        fecha_lista.append(get_tasks[f].fecha)
+
+    msg = {
+            "mensaje":"Tareas devueltas con exito",
+            "id": id_lista,
+            "nombre":nombre_lista,
+            "descripcion": descripcion_lista,
+            "importancia":importancia_lista,
+            "fecha": fecha_lista,
+            "creacion":True
+        }
+
+    return msg
 if __name__ == '__main__':
     #base.metadata.drop_all(motor)
     #base.metadata.create_all(motor)
