@@ -17,6 +17,9 @@ span.addEventListener("click",function() {
   modal.style.display = "none";
 });
 
+
+
+
 //DDDDDDDDDDDDD
 let importancia_VM = document.getElementById("importancia_VM");
 let nombre_VM = document.getElementById("nombre_VM");

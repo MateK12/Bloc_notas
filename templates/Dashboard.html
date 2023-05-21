@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">    <title>Todas tus notas</title>
     <link rel="stylesheet" href="../styles/dashboard.css">
     <link rel="stylesheet" href="../styles/hover.css">
+    <link rel="stylesheet" href="../styles/VM_editar.css">
 </head>
 <body>
     <header>
@@ -29,14 +30,13 @@
     <main>
         <div id="task_container2" class="container">
             <div id="task_container" class="row">
-                <!-- <div id="task_container" class="row">
-                </div> -->
+              
             </div>
         </div>
         
 
       
-        <!-- Ventana modal, por defecto no visiblel -->
+        <!-- Ventana modal, por defecto no visible -->
         <div id="ventanaModal" class="modal">
           <div class="contenido-modal">
               <span class="cerrar">&times;</span>
@@ -64,12 +64,46 @@
               </div>
           </div>
         </div>
+
+        <!-- Ventana modal Editar -->
+        <div id="ventanaModalEditar" class="modal">
+            <div class="contenido-modalEditar">
+                <span class="cerrarEditar">&times;</span>
+                <h4>Editar tarea</h4>
+                <br>
+                <div class="input-group mb-3">
+                  <div id="cont_ventana_modalEditar" class="container">
+                      <br>
+                      <input id="nombre_VM" type="text" class="form-control" placeholder="Nombre" aria-label="Username">
+                      <br>
+                      <input id="descripcion_VM" type="text" class="form-control" placeholder="Descripcion" aria-label="Server">
+                      <br>
+                      <select id="importancia_VM" class="form-select" aria-label="Default select example">
+                          <option selected>Importancia</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="3">4</option>
+                          <option value="3">5</option>
+                      </select>
+                      <br>
+                      <input id="btn_VMEditar" class="btn btn-primary" type="submit" value="Submit">
+                  </div>
+                  
+                </div>
+            </div>
+          </div>
     </main>
     <footer>
 
     </footer>
     <script src="../scripts/dashboard.js"></script>
     <script src="../scripts/Ventana_modal.js"></script>
-
+    <script src="../scripts/Ventana_Modal_Editar.js"></script>
+    <script>
+        async function Editar_Tarea_Redireccion(id) {
+            let API = "http://127.0.0.1:5000";
+            let respuesta = await fetch(`${API}/Editar_Tareas`)}
+    </script>
 </body>
 </html>

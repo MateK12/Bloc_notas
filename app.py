@@ -16,7 +16,7 @@ from passlib.context import CryptContext
 
 
 base = sqlalchemy.orm.declarative_base()           #Alchemy
-motor = create_engine("mysql://root:root@192.168.44.114:3306/bloc_notas")  #Alchemy
+motor = create_engine("mysql://root:root@127.0.0.1:3306/bloc_notas")  #Alchemy
 db= sqlalchemy
 connection = motor.raw_connection()
 cur = connection.cursor()
@@ -36,8 +36,8 @@ class User(base):
 class Tarea(base):
     __tablename__ = "Tareas"
     id = Column(Integer(), primary_key = True)
-    nombre =  Column(String(50), nullable = False, unique = False)
-    descripcion =  Column(String(250), nullable = False, unique = True)    
+    nombre =  Column(String(50),  nullable = False, unique = False)
+    descripcion =  Column(String(250), nullable = False, unique = False)    
     importancia = Column(Integer())
     fecha = Column(DateTime, default=datetime.now())
     Usuario_id = Column(Integer,ForeignKey('Usuarios.id'))
@@ -179,6 +179,9 @@ def Obtener_tareas ():
         }
 
     return msg
+@app.route("/Editar_Tareas",methods=["POST","GET"])
+def Editar_Tareas():
+    return render_template("editar_tareas_template.html")
 if __name__ == '__main__':
     #base.metadata.drop_all(motor)
     #base.metadata.create_all(motor)

@@ -16,15 +16,15 @@ function create_task(titulo,descripcion ,importancia,fecha = "ahora",id=localSto
       <p class="card-text">${descripcion}</p>
       <h3 class="card-subtitle mb-2 text-body-secondary">${importancia}</h3>
       <h4 class="card-subtitle mb-2 text-body-secondary">${fecha}</h4>
-      <h6 class="card-subtitle mb-2 text-body-secondary">${id}</h6>
-
-      <button type="button" class="btn btn-info">Editar</button>
+      <h6 id="h6_id" class="card-subtitle mb-2 text-body-secondary">${id}</h6>
+      <button onclick=Editar_Tarea_Redireccion(${id}) id="abrirModalEditar" type="button" class="btn btn-info">Editar</button>
       <button type="button" class="btn btn-danger">Eliminar</button>
       </div>
   </div>
   </div> <br>`
   container.className = "col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12";  
   task_container.appendChild(container);
+  let btn_editar = document.querySelector("abrirModalEditar");
 }
 boton_add.addEventListener("click",create_task);
 
@@ -40,6 +40,7 @@ async function Obtener_tareas(id) {
   })
   res = await respuesta.json()
   console.log(res);
+  localStorage.setItem("tareas",res);
   if (res.creacion) {
     for (let i = 0; i < res.nombre.length; i++) {
     create_task(res.nombre[i],res.descripcion[i],res.importancia[i],res.fecha[i],res.id[i]);  
