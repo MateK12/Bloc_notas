@@ -155,7 +155,6 @@ def Obtener_tareas ():
         ).all()
     print(len(get_tasks))
     sesion1.commit()
-    print("Crea la tarea")
     id_lista = []
     nombre_lista= []
     importancia_lista = []
@@ -179,9 +178,21 @@ def Obtener_tareas ():
         }
 
     return msg
-@app.route("/Editar_Tareas",methods=["POST","GET"])
-def Editar_Tareas():
-    return render_template("editar_tareas_template.html")
+@app.route("/Traer_Tarea",methods=["POST","GET"])
+def Traer_Tarea():
+    obtener_datos_tarea = sesion1.query(Tarea).filter(
+            Tarea.id == request.json["id"],
+        ).all()
+
+    msg = {
+            "mensaje":"tarea lista para editar",
+            "id": obtener_datos_tarea[0].id,
+            "nombre":obtener_datos_tarea[0].nombre,
+            "descripcion": obtener_datos_tarea[0].descripcion,
+            "importancia":obtener_datos_tarea[0].importancia,
+            "fecha": obtener_datos_tarea[0].fecha,
+        }
+    return msg
 if __name__ == '__main__':
     #base.metadata.drop_all(motor)
     #base.metadata.create_all(motor)

@@ -99,11 +99,15 @@
     </footer>
     <script src="../scripts/dashboard.js"></script>
     <script src="../scripts/Ventana_modal.js"></script>
-    <script src="../scripts/Ventana_Modal_Editar.js"></script>
     <script>
         async function Editar_Tarea_Redireccion(id) {
-            let API = "http://127.0.0.1:5000";
-            let respuesta = await fetch(`${API}/Editar_Tareas`)}
+            localStorage.setItem("tarea_editandose",id);
+            setTimeout(()=>{
+                window.location.href = "./editar_tareas.html" 
+                
+            },500)
+                }
+
     </script>
 </body>
 </html>
