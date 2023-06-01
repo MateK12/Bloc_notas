@@ -16,7 +16,7 @@ from passlib.context import CryptContext
 
 
 base = sqlalchemy.orm.declarative_base()           #Alchemy
-motor = create_engine("mysql://root:root@127.0.0.1:3306/bloc_notas")  #Alchemy
+motor = create_engine("mysql://root:root@192.168.44.114:3306/bloc_notas")  #Alchemy
 db= sqlalchemy
 connection = motor.raw_connection()
 cur = connection.cursor()
@@ -191,6 +191,20 @@ def Traer_Tarea():
             "descripcion": obtener_datos_tarea[0].descripcion,
             "importancia":obtener_datos_tarea[0].importancia,
             "fecha": obtener_datos_tarea[0].fecha,
+        }
+    return msg
+@app.route("/Editar_Tarea",methods=["POST","GET"])
+def Editar_Tarea():
+    print("edita la tarea")
+    obtener_tarea = sesion1.query(Tarea).filter(
+            Tarea.id == request.json["id"],
+        ).update({
+            Tarea.nombre: request.json["titulo_post"],
+            Tarea.descripcion: request.json["descripcion_post"],
+            Tarea.importancia: request.json["importancia_post"]
+        })
+    msg = {
+            "mensaje":"tarea Editada",
         }
     return msg
 if __name__ == '__main__':
