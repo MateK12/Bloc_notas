@@ -25,8 +25,9 @@ Editar_Tarea_Redireccion(localStorage.getItem("tarea_editandose"));
 
 //Editar la tarea
 
-async function Editar_Tarea(id) {
+async function Editar_Tarea() {
     let API = "http://127.0.0.1:5000";
+    let id = localStorage.getItem("tarea_editandose");
     let titulo_post = titulo.value;
     let descripcion_post = descripcion.value;
     let importancia_post = importancia.value
@@ -45,4 +46,4 @@ async function Editar_Tarea(id) {
     titulo.innerHTML = res.nombre;  
     descripcion.innerHTML = res.descripcion;
         }
-btn_editar.addEventListener("click",Editar_Tarea(localStorage.getItem("tarea_editandose")));
+btn_editar.addEventListener("click",Editar_Tarea);

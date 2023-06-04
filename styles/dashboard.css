@@ -52,15 +52,16 @@ a{color:inherit;text-decoration:none}
   @media (max-width: 576px) {
     #abrirModal{
       position: relative;
-      left: 150px !important;
-      top: 170px;
+      left: 250px !important;
+      top: 220px !important;
+      z-index: 3;
       position: fixed;
     }
   }
   @media (max-width: 374px) {
     #abrirModal{
       position: relative;
-      left: 190px !important;
+      right: 400px;
       top: 200px;
     }
   }

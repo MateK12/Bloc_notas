@@ -9,8 +9,10 @@ let task_container = document.getElementById("task_container");
 let boton_add = document.getElementById("btn_add");
 function create_task(titulo,descripcion ,importancia,fecha = "ahora",id=localStorage.getItem("id_usuario")+1) {
     let container = document.createElement("div");
-    container.innerHTML = `<div>
-    <div class="card" style="width: 18rem;">
+    container.innerHTML = `
+    <br>
+    <div>
+    <div class="card" style="width: 20 rem;">
     <div class="card-body">
       <h2 class="card-title">${titulo}</h2>
       <p class="card-text">${descripcion}</p>
@@ -59,20 +61,28 @@ btn_VM.addEventListener("click",async function  handle_submit(e) {  //Crear tare
   let nombre = nombre_VM.value;
   let descripcion = descripcion_VM.value;
   let id_usuario = localStorage.getItem('id_usuario');
-  const respuesta = await fetch(`${API}/Agregar_tareas`,{
-    method:["POST"],
-    headers:{"Content-Type":"application/json"},
-  body: JSON.stringify ({
-    importancia,
-    nombre,
-    descripcion,
-    id_usuario
-  })
-  })
+  console.log(nombre);
+  console.log(descripcion);
+  console.log(importancia);
+  if (importancia == "Importancia") {
+    alert("Complete el campo importancia, por favor")
+  }else{
+    const respuesta = await fetch(`${API}/Agregar_tareas`,{
+      method:["POST"],
+      headers:{"Content-Type":"application/json"},
+    body: JSON.stringify ({
+      importancia,
+      nombre,
+      descripcion,
+      id_usuario
+    })
+    })
+    
+    let res = await respuesta.json();
+    console.log(res);
+    create_task(nombre,descripcion,importancia)
+  }
   
-  let res = await respuesta.json();
-  console.log(res);
-  create_task(nombre,descripcion,importancia)
   // create_task(res.nombre,res.descripcion,res.importancia,res.fecha,res.id)
   
   
