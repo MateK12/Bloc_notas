@@ -20,7 +20,8 @@ function create_task(titulo,descripcion ,importancia,fecha = "ahora",id=localSto
       <h4 class="card-subtitle mb-2 text-body-secondary">${fecha}</h4>
       <h6 id="h6_id" class="card-subtitle mb-2 text-body-secondary">${id}</h6>
       <button onclick=Editar_Tarea_Redireccion(${id}) id="abrirModalEditar" type="button" class="btn btn-info">Editar</button>
-      <button type="button" class="btn btn-danger">Eliminar</button>
+      
+      <button class="btn btn-danger" onclick=btn_borrar() id="btnModal">Abrir modal</button> 
       </div>
   </div>
   </div> <br>`

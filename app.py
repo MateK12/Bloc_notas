@@ -16,7 +16,7 @@ from passlib.context import CryptContext
 
 
 base = sqlalchemy.orm.declarative_base()           #Alchemy
-motor = create_engine("mysql://root:root@127.0.0.1:3306/bloc_notas")  #Alchemy
+motor = create_engine("mysql://root:root@192.168.44.114:3306/bloc_notas")  #Alchemy
 db= sqlalchemy
 connection = motor.raw_connection()
 cur = connection.cursor()
@@ -207,6 +207,11 @@ def Editar_Tarea():
             "mensaje":"tarea Editada",
         }
     return msg
+@app.route("/Borrar_tarea/<id>",methods=["DELETE"])
+def Borrar_tarea(id):
+    print("id es"+id)
+    sesion1.query(Tarea).filter(Tarea.id == id).delete()
+    return "funciono"
 if __name__ == '__main__':
     #base.metadata.drop_all(motor)
     #base.metadata.create_all(motor)
