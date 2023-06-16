@@ -97,15 +97,7 @@
             </div>
           </div>
           <!-- Ventana modal Borrar -->
-          <button class="modal_malo" id="btnModal">Abrir modal</button> 
-          <div id="myModal" class="modalContainer">
-           <div class="modal-content">
-           <span class="close">×</span> <h2>Modal</h2>
-            <h3>Esta seguro que desea eliminar esta tarea</h3>
-            <br>
-            <button class="btn btn-danger">ELIMINAR</button>
-
-        </div> 
+       
     </main>
     <footer>
 
@@ -121,6 +113,18 @@
             },500)
                 }
 
+    </script>
+    <script>
+        async function btn_borrar(id) {
+            Eliminar_tarea(id);
+        }
+        async function Eliminar_tarea(id = 3) {
+            fetch(`http://127.0.0.1:5000/Borrar_tarea/${id}`,{method:["DELETE"]});
+            setTimeout(()=>{
+                window.location.reload()
+            },100)
+        }
+        
     </script>
     <script>
         if(document.getElementById("btnModal")){

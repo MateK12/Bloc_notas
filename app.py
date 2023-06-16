@@ -210,7 +210,8 @@ def Editar_Tarea():
 @app.route("/Borrar_tarea/<id>",methods=["DELETE"])
 def Borrar_tarea(id):
     print("id es"+id)
-    sesion1.query(Tarea).filter(Tarea.id == id).delete()
+    id_int = int(id)
+    sesion1.query(Tarea).filter(Tarea.id == id_int).delete()
     return "funciono"
 if __name__ == '__main__':
     #base.metadata.drop_all(motor)

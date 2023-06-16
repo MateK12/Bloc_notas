@@ -20,8 +20,7 @@ function create_task(titulo,descripcion ,importancia,fecha = "ahora",id=localSto
       <h4 class="card-subtitle mb-2 text-body-secondary">${fecha}</h4>
       <h6 id="h6_id" class="card-subtitle mb-2 text-body-secondary">${id}</h6>
       <button onclick=Editar_Tarea_Redireccion(${id}) id="abrirModalEditar" type="button" class="btn btn-info">Editar</button>
-      
-      <button class="btn btn-danger" onclick=btn_borrar() id="btnModal">Abrir modal</button> 
+      <button class="btn btn-danger" onclick=btn_borrar(${id}) id="btnModal">Eliminar</button> 
       </div>
   </div>
   </div> <br>`
@@ -53,7 +52,9 @@ async function Obtener_tareas(id) {
     console.log(id_ultima_tarea);
   }
 }
-Obtener_tareas(localStorage.getItem("id_usuario"));
+setTimeout(()=>{
+  Obtener_tareas(localStorage.getItem("id_usuario"));
+},1000)
 
 
 btn_VM.addEventListener("click",async function  handle_submit(e) {  //Crear tarea en la ventana modal
