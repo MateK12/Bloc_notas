@@ -62,13 +62,11 @@ mysql = MySQL(app)
 
 @app.route("/crear_cuenta",methods=["POST","GET"])
 def crear_cuenta():
-    print("llego")
     user_exists = sesion1.query(User).filter(User.usuario == request.json["usuario_value"],).first() #Veo si el usuario NO existe
     if user_exists == None:
         hashed_psswd = Contetxo.hash(request.json["contraseña_value"]) #Hasheo contraseña
         sesion1.add(User(usuario = request.json["usuario_value"], contraseña = hashed_psswd)) #Agrego usuario y su contraseña hasheada
         sesion1.commit()
-        print("Crea la cuenta")
         msg = {
             "mensaje":"La cuenta ha sido creada con exito",
             "creacion":True
@@ -79,7 +77,6 @@ def crear_cuenta():
                 "mensaje":"La cuenta ya existe",
                 "creacion":False
             }
-        print("cuenta existente")
         return msg
     else:
         print("falloooo")
@@ -117,7 +114,7 @@ def iniciar_sesion():
                 return msg
     else:
             return("falloooo")
-@app.route("/Agregar_tareas", methods=["POST","GET"])           #Iniciar sesion
+@app.route("/Agregar_tareas", methods=["POST","GET"])           
 def agregar_tareas():
     sesion1.add(Tarea(nombre = request.json["nombre"], descripcion = request.json["descripcion"],
     importancia = request.json["importancia"], Usuario_id = request.json["id_usuario"],
@@ -125,9 +122,8 @@ def agregar_tareas():
     consulta = sesion1.query(Tarea).filter(
             Tarea.id == request.json["id_usuario"],
         ).all()
-    print(len(consulta))
     sesion1.commit()
-    print("Crea la tarea")
+    print("Importancia ",request.json["importancia"])
     nombre_lista= []
     importancia_lista = []
     descripcion_lista = []
@@ -183,7 +179,7 @@ def Traer_Tarea():
     obtener_datos_tarea = sesion1.query(Tarea).filter(
             Tarea.id == request.json["id"],
         ).all()
-
+    print("la importancia es ",obtener_datos_tarea[0].importancia)
     msg = {
             "mensaje":"tarea lista para editar",
             "id": obtener_datos_tarea[0].id,

@@ -15,8 +15,12 @@ a{color:inherit;text-decoration:none}
 }
 #task_container2{
     background-color:#7ec4cf;
-    height: fit-content;
+  height: fit-content;
 
+}
+#cont_opciones{
+  display: flex;
+  height: 90px;
 }
 .add{
     width: 70px;
@@ -108,7 +112,7 @@ a{color:inherit;text-decoration:none}
     top: 30px;
     width: 60px;
     height: 60px;
-    border-radius: 50%;
+    border-top-right-radius: 30%;
     transition: all 0.2s ease;
     background-color: #28a745;
   }
@@ -130,3 +134,18 @@ a{color:inherit;text-decoration:none}
     text-decoration: none;
     cursor: pointer;
   }
+#barra_buscadora{
+  height: 50px;
+  width: 300px;
+}
+#ordenar_por{
+  height: 50px;
+  border-top-right-radius:30px ;
+
+}
+#btn_buscar{
+  margin-right: 20px;
+  height: 50px;
+  border-left: none;
+  border-top-right-radius:30px ;
+}

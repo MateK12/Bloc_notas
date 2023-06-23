@@ -1,13 +1,14 @@
 let API = "http://127.0.0.1:5000";
 
 
-
-
-
-//Funcion para crear plantilla
+let tareas = []
+let ordenar_Select = document.getElementById("ordenar_por");
 let task_container = document.getElementById("task_container");
 let boton_add = document.getElementById("btn_add");
+console.log("fdfadfa")
+
 function create_task(titulo,descripcion ,importancia,fecha = "ahora",id=localStorage.getItem("id_usuario")+1) {
+  
     let container = document.createElement("div");
     container.innerHTML = `
     <br>
@@ -26,8 +27,7 @@ function create_task(titulo,descripcion ,importancia,fecha = "ahora",id=localSto
   </div> <br>`
   container.className = "col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12";  
   task_container.appendChild(container);
-  let btn_editar = document.querySelector("abrirModalEditar");
-}
+ }
 boton_add.addEventListener("click",create_task);
 
 
@@ -45,6 +45,14 @@ async function Obtener_tareas(id) {
   localStorage.setItem("tareas",res);
   if (res.creacion) {
     for (let i = 0; i < res.nombre.length; i++) {
+    let obj_tarea = {
+        titulo:res.nombre[i],
+        descripcion:res.descripcion[i],
+        importancia:res.importancia[i],
+        fecha:res.fecha[i],
+        id:res.id[i]
+      }
+    tareas.push(obj_tarea)
     create_task(res.nombre[i],res.descripcion[i],res.importancia[i],res.fecha[i],res.id[i]);  
     }
     id_ultima_tarea =  res.id[res.id.length -1];
@@ -86,9 +94,47 @@ btn_VM.addEventListener("click",async function  handle_submit(e) {  //Crear tare
   }
   
   // create_task(res.nombre,res.descripcion,res.importancia,res.fecha,res.id)
+}) 
+ordenar_Select.addEventListener("change",()=>{
+  console.log(ordenar_Select.value)
+  if (ordenar_Select.value=="1") {
+    Ordenar_nombre();
+  }else if (ordenar_Select.value=="2") {
+    Ordenar_Importancia();
+  }else{
+    window.location.reload()
+  }
+  })
   
-  
-})
+function Ordenar_nombre() {
+  task_container.innerHTML = " ";
+  tareas.sort(function (a, b) {
+    if (a.titulo > b.titulo) {
+      return 1;
+    }
+    if (a.titulo < b.titulo) {
+      return -1;
+    }
+    return 0;
+  }); 
+  for (let i = 0; i < tareas.length; i++) {
+    create_task(tareas[i].titulo,tareas[i].descripcion ,tareas[i].importancia,tareas[i].fecha,tareas[i].id)
+    
+      }
+}
+function Ordenar_Importancia() {
+  task_container.innerHTML = " ";
+  tareas.sort(function(a, b) {
+    return b.importancia - a.importancia;
+  });
+  for (let i = 0; i < tareas.length; i++) {
+    create_task(tareas[i].titulo,tareas[i].descripcion ,tareas[i].importancia,tareas[i].fecha,tareas[i].id)
+    
+      }
+}
+
+
+
 
 //cerrar sesion
 let cerrar_sesion = document.getElementById("btn_CerrarSesion");
