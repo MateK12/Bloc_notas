@@ -13,7 +13,8 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import ForeignKey
 from flask_cors import CORS
 from passlib.context import CryptContext 
-
+import smtplib
+import random
 
 base = sqlalchemy.orm.declarative_base()           #Alchemy
 motor = create_engine("mysql://root:root@192.168.44.114:3306/bloc_notas")  #Alchemy
@@ -62,10 +63,13 @@ mysql = MySQL(app)
 
 @app.route("/crear_cuenta",methods=["POST","GET"])
 def crear_cuenta():
+    print("esta creando")
     user_exists = sesion1.query(User).filter(User.usuario == request.json["usuario_value"],).first() #Veo si el usuario NO existe
     if user_exists == None:
+        print(request.json["contraseña_value"])
         hashed_psswd = Contetxo.hash(request.json["contraseña_value"]) #Hasheo contraseña
-        sesion1.add(User(usuario = request.json["usuario_value"], contraseña = hashed_psswd)) #Agrego usuario y su contraseña hasheada
+        sesion1.add(User(usuario = request.json["usuario_value"], contraseña = hashed_psswd,) ) #Agrego usuario y su contraseña hasheada
+        print("posta2")
         sesion1.commit()
         msg = {
             "mensaje":"La cuenta ha sido creada con exito",
@@ -209,7 +213,21 @@ def Borrar_tarea(id):
     id_int = int(id)
     sesion1.query(Tarea).filter(Tarea.id == id_int).delete()
     return "funciono"
+
+@app.route("/Enviar_mail", methods=["POST","GET"])
+def EnviarCodigo():
+    codigo = str(request.json["numeroConfirmacion"])
+    mensaje = "Su codigo de confirmacion es " + codigo
+    print(mensaje)
+    server = smtplib.SMTP("smtp.gmail.com",587)
+    server.starttls()
+    server.login("m.kristich@alumno.etec.um.edu.ar","mket3024")
+    server.sendmail("m.kristich@gmail.com",request.json["usuario_value"],mensaje)
+    msg = {"exito":"Envio exitoso"}
+    server.quit()
+    return msg
+
 if __name__ == '__main__':
-    #base.metadata.drop_all(motor)
-    #base.metadata.create_all(motor)
+    # base.metadata.drop_all(motor)
+    # base.metadata.create_all(motor)
     app.run(debug=True, port=5000)
