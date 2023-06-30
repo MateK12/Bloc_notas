@@ -63,13 +63,11 @@ mysql = MySQL(app)
 
 @app.route("/crear_cuenta",methods=["POST","GET"])
 def crear_cuenta():
-    print("esta creando")
     user_exists = sesion1.query(User).filter(User.usuario == request.json["usuario_value"],).first() #Veo si el usuario NO existe
     if user_exists == None:
         print(request.json["contraseña_value"])
         hashed_psswd = Contetxo.hash(request.json["contraseña_value"]) #Hasheo contraseña
         sesion1.add(User(usuario = request.json["usuario_value"], contraseña = hashed_psswd,) ) #Agrego usuario y su contraseña hasheada
-        print("posta2")
         sesion1.commit()
         msg = {
             "mensaje":"La cuenta ha sido creada con exito",
@@ -112,7 +110,8 @@ def iniciar_sesion():
     elif user_exists == None:
                 msg = {
                 "mensaje":"La cuenta no existe",
-                "autenticacion":False
+                "autenticacion":False,
+                "existencia":False
                 }
                 print("No tienes cuenta")
                 return msg
@@ -127,7 +126,6 @@ def agregar_tareas():
             Tarea.id == request.json["id_usuario"],
         ).all()
     sesion1.commit()
-    print("Importancia ",request.json["importancia"])
     nombre_lista= []
     importancia_lista = []
     descripcion_lista = []
@@ -153,7 +151,6 @@ def Obtener_tareas ():
     get_tasks = sesion1.query(Tarea).filter(
             Tarea.Usuario_id == request.json["id"],
         ).all()
-    print(len(get_tasks))
     sesion1.commit()
     id_lista = []
     nombre_lista= []
@@ -183,7 +180,6 @@ def Traer_Tarea():
     obtener_datos_tarea = sesion1.query(Tarea).filter(
             Tarea.id == request.json["id"],
         ).all()
-    print("la importancia es ",obtener_datos_tarea[0].importancia)
     msg = {
             "mensaje":"tarea lista para editar",
             "id": obtener_datos_tarea[0].id,
@@ -195,7 +191,6 @@ def Traer_Tarea():
     return msg
 @app.route("/Editar_Tarea",methods=["POST","GET"])
 def Editar_Tarea():
-    print("edita la tarea")
     obtener_tarea = sesion1.query(Tarea).filter(
             Tarea.id == request.json["id"],
         ).update({
@@ -206,6 +201,7 @@ def Editar_Tarea():
     msg = {
             "mensaje":"tarea Editada",
         }
+    print("tarea editada")
     return msg
 @app.route("/Borrar_tarea/<id>",methods=["DELETE"])
 def Borrar_tarea(id):
@@ -218,15 +214,24 @@ def Borrar_tarea(id):
 def EnviarCodigo():
     codigo = str(request.json["numeroConfirmacion"])
     mensaje = "Su codigo de confirmacion es " + codigo
-    print(mensaje)
     server = smtplib.SMTP("smtp.gmail.com",587)
     server.starttls()
     server.login("m.kristich@alumno.etec.um.edu.ar","mket3024")
     server.sendmail("m.kristich@gmail.com",request.json["usuario_value"],mensaje)
     msg = {"exito":"Envio exitoso"}
     server.quit()
+    print(mensaje)
     return msg
-
+@app.route("/ExisteCuenta",methods=["POST","GET"])
+def ExisteCuenta():
+    existe = sesion1.query(User).filter(User.usuario == request.json["usuario_value"],).first() #Veo si el usuario NO existe
+    if existe == None:
+        msg = {"existencia":False}
+        return msg
+    elif existe != None:
+        print("fdsa")
+        msg = {"existencia":True}
+        return msg
 if __name__ == '__main__':
     # base.metadata.drop_all(motor)
     # base.metadata.create_all(motor)

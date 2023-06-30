@@ -43,6 +43,26 @@ input[type="text"], input[type="password"] {
 	cursor: pointer;
 	transition: background-color 0.3s ease;
 }
+#volverEnviar{
+	text-align: center;
+	background-color: #009c05b4;
+	color: #fff;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+.btni{
+	text-align: center;
+	background-color: #4CAF50;
+	color: #fff;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
 input[type="submit"] {
 	background-color: #4CAF50;
 	color: #fff;
