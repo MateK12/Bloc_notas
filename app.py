@@ -163,7 +163,9 @@ def Obtener_tareas ():
         descripcion_lista.append(get_tasks[f].descripcion)
         importancia_lista.append(get_tasks[f].importancia)
         fecha_lista.append(get_tasks[f].fecha)
-
+    for i in range(len(fecha_lista)):
+        fecha_lista[i].strftime("%D %H:%M")
+        print(fecha_lista[i])
     msg = {
             "mensaje":"Tareas devueltas con exito",
             "id": id_lista,
@@ -213,7 +215,9 @@ def Borrar_tarea(id):
 @app.route("/Enviar_mail", methods=["POST","GET"])
 def EnviarCodigo():
     codigo = str(request.json["numeroConfirmacion"])
-    mensaje = "Su codigo de confirmacion es " + codigo
+    cuerpo = "Su codigo de confirmacion es " + codigo
+    asunto = "Codigo de confirmacion"
+    mensaje = 'Subject:{}\n\n{}'.format(asunto,cuerpo)
     server = smtplib.SMTP("smtp.gmail.com",587)
     server.starttls()
     server.login("m.kristich@alumno.etec.um.edu.ar","mket3024")

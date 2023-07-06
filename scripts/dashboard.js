@@ -20,8 +20,10 @@ function create_task(titulo,descripcion ,importancia,fecha = "ahora",id=localSto
       <h3 class="card-subtitle mb-2 text-body-secondary">${importancia}</h3>
       <h4 class="card-subtitle mb-2 text-body-secondary">${fecha}</h4>
       <h6 id="h6_id" class="card-subtitle mb-2 text-body-secondary">${id}</h6>
-      <button onclick=Editar_Tarea_Redireccion(${id}) id="abrirModalEditar" type="button" class="btn btn-info">Editar</button>
-      <button class="btn btn-danger" onclick=btn_borrar(${id}) id="btnModal">Eliminar</button> 
+      <button onclick=Editar_Tarea_Redireccion(${id}) id="abrirModalEditar" type="button" class="btn btn-info"><img src="../assets/editar.png" alt="">
+      </button>
+      <button class="btn btn-danger" onclick=btn_borrar(${id}) id="btnModal"><img src="../assets/eliminar.png" alt="">
+      </button> 
       </div>
   </div>
   </div> <br>`
@@ -42,6 +44,10 @@ async function Obtener_tareas(id) {
   })
   res = await respuesta.json()
   console.log(res);
+  for (let i = 0; i < res.fecha.length; i++) {
+    res.fecha[i].split();
+    
+  }
   localStorage.setItem("tareas",res);
   if (res.creacion) {
     for (let i = 0; i < res.nombre.length; i++) {
@@ -91,6 +97,9 @@ btn_VM.addEventListener("click",async function  handle_submit(e) {  //Crear tare
     let res = await respuesta.json();
     console.log(res);
     create_task(nombre,descripcion,importancia)
+    setTimeout(()=>{
+      window.location.reload()
+      },500)
   }
   
   // create_task(res.nombre,res.descripcion,res.importancia,res.fecha,res.id)
