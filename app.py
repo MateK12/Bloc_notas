@@ -236,6 +236,24 @@ def ExisteCuenta():
         print("fdsa")
         msg = {"existencia":True}
         return msg
+@app.route("/TraerTareaPorNombre",methods=["POST","GET"])
+def TraerTareaPorNombre():
+    existe = sesion1.query(Tarea).filter(Tarea.nombre == request.json["nombre"]).first()
+    if existe == None:
+        msg = {"existencia":False}
+        print("la tarea no existe")
+        return msg
+    elif existe != None:
+        print("la tarea si existe")
+        traerTarea = sesion1.query(Tarea).filter(Tarea.nombre == request.json["nombre"]).all()
+        msg = {
+            "existencia":True,
+            "nombre":traerTarea[0].nombre,
+            "descripcion":traerTarea[0].descripcion,
+            "fecha":traerTarea[0].fecha
+            
+        }
+        return msg
 if __name__ == '__main__':
     # base.metadata.drop_all(motor)
     # base.metadata.create_all(motor)
