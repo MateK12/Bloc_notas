@@ -17,7 +17,13 @@ function create_task(titulo,descripcion ,importancia,fecha = "ahora",id=localSto
     <div class="card-body">
       <h2 class="card-title">${titulo}</h2>
       <p class="card-text">${descripcion}</p>
-      <h3 class="card-subtitle mb-2 text-body-secondary">${importancia}</h3>
+   
+      <img id="estrella" src="../assets/estrella.png" alt="">
+      <span>
+      <h3 class="card-subtitle mb-2 text-body-secondary"  id="estrella">${importancia}</h3>
+      </span>
+
+    
       <h4 class="card-subtitle mb-2 text-body-secondary">${fecha}</h4>
       <h6 id="h6_id" class="card-subtitle mb-2 text-body-secondary">${id}</h6>
       <button onclick=Editar_Tarea_Redireccion(${id}) id="abrirModalEditar" type="button" class="btn btn-info"><img src="../assets/editar.png" alt="">

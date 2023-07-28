@@ -1,10 +1,14 @@
+
 body {
+  background-image: url("../assets/dashboard-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 	font-family: Arial, sans-serif;
 	background-color: #f2f2f2;
 }
 a{
   text-decoration: none;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .container {
@@ -67,7 +71,7 @@ body {
   
   button {
     background-color: #4caf50;
-    color: #ffffff;
+    color: #000000;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
