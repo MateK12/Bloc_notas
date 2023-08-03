@@ -5,7 +5,6 @@ let tareas = []
 let ordenar_Select = document.getElementById("ordenar_por");
 let task_container = document.getElementById("task_container");
 let boton_add = document.getElementById("btn_add");
-console.log("fdfadfa")
 
 function create_task(titulo,descripcion ,importancia,fecha = "ahora",id=localStorage.getItem("id_usuario")+1) {
   
@@ -18,12 +17,13 @@ function create_task(titulo,descripcion ,importancia,fecha = "ahora",id=localSto
       <h2 class="card-title">${titulo}</h2>
       <p class="card-text">${descripcion}</p>
    
-      <img id="estrella" src="../assets/estrella.png" alt="">
       <span>
-      <h3 class="card-subtitle mb-2 text-body-secondary"  id="estrella">${importancia}</h3>
+      
+      <h3 class="card-subtitle mb-2 text-body-secondary"  id="importanciaTemplate">${importancia}</h3>
+      <img id="estrella" src="../assets/estrella.png" alt="">
       </span>
-
-    
+      <br>
+      <br><br>
       <h4 class="card-subtitle mb-2 text-body-secondary">${fecha}</h4>
       <h6 id="h6_id" class="card-subtitle mb-2 text-body-secondary">${id}</h6>
       <button onclick=Editar_Tarea_Redireccion(${id}) id="abrirModalEditar" type="button" class="btn btn-info"><img src="../assets/editar.png" alt="">

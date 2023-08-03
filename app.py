@@ -248,8 +248,10 @@ def TraerTareaPorNombre():
         traerTarea = sesion1.query(Tarea).filter(Tarea.nombre == request.json["nombre"]).all()
         msg = {
             "existencia":True,
+            "id":traerTarea[0].id,
             "nombre":traerTarea[0].nombre,
             "descripcion":traerTarea[0].descripcion,
+            "importancia":traerTarea[0].importancia,
             "fecha":traerTarea[0].fecha
             
         }

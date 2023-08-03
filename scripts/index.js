@@ -27,9 +27,9 @@ boton.addEventListener("click",async function  handle_submit(e) {
       localStorage.setItem('id_usuario',res.user_id);
       window.location.href= "../templates/Dashboard.html"
     }if(res.existencia == false){
-      mensaje.innerHTML = "La cuenta no existe"
+      mensaje.innerHTML = "La cuenta no existe";
     }
     else{
-        mensaje.innerHTML = "Error en las credenciales"
+        mensaje.innerHTML = "Error en las credenciales";
     }
   })
