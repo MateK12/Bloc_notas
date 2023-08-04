@@ -1,6 +1,15 @@
 Change Log
 
 				     Bloc de notas
+4/08/2023
+Agregado
+-Cuando busca una tarea y no encuentra nada, muestra una alerta
+-Boton para volver al dashboard una vez encontrada la tarea
+-Creacion de funcion para volver al dashboard
+Arreglado
+-Resposiveness de los botones para crear tarea e inicio de sesion
+-Superposicion del boton buscar cuando se abre el modal
+-Responsiveness del input para buscar una tarea y del select de ordenar por
 3/08/2023
 Agregado
 -Búsqueda de tarea por nombre

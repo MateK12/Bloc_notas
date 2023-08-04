@@ -15,33 +15,42 @@
 <span></span>
 <body>
     <header>
-        <div class="row">
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4" id="cont_titulo">
-                <button id="btn_CerrarSesion" type="button" class="btn btn-danger"><a href="../index.html"><img src="../assets/cerrar_sesion.png" alt=""></a></button>
-            </div>
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4" id="cont_titulo">
+            <div class="text-center" id="cont_titulo">
                 <h1 id="titulo">Tus notas</h1>
+                
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4" id="cont_titulo">
-                <button  class="btn btn-succes" id="btn_add" type="button" ></button>
-                <button type="button" id="abrirModal" class="btn btn-succes"><img src="../assets/añadir.png" alt=""></button>
-
+            <div id="cont_titulo" class="row">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4" id="cont_titulo" >
+                    <button id="btn_CerrarSesion" type="button" class="btn btn-danger"><a href="../index.html"><img src="../assets/cerrar_sesion.png" alt=""></a></button>
+                </div>
+                
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4" id="cont_titulo">
+                    <button  class="btn btn-succes" id="btn_add" type="button" ></button>
+                    <button type="button" id="abrirModal" class="btn btn-succes"><img src="../assets/añadir.png" alt=""></button>
+                </div>
             </div>
-        </div>
+      
     </header>
     <main>
         <div id="task_container2" class="container">
             <br>
-            <div id="cont_opciones" class="input-group mb-3">
-                <input id="barra_buscadora" type="text" class="form-control" placeholder="Ingresar nombre" aria-label="Recipient's username" aria-describedby="button-addon2">
-                <button class="btn btn-outline-secondary btn-primary" type="button" id="btn_buscar"><img src="../assets/lupa.png" alt=""></button>
-                <select id="ordenar_por" class="form-select" aria-label="Default select example">
-                    <option selected>Ordenar por</option>
-                    <option value="1">Nombre</option>
-                    <option value="2">Importancia</option>
-                    <option value="3">Fecha de carga</option>
-                </select>
-              </div>
+            <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                    <div id="cont_opciones" class="input-group mb-3">
+                        <input id="barra_buscadora" type="text" class="form-control" placeholder="Ingresar nombre" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-secondary btn-primary" type="button" id="btn_buscar"><img src="../assets/lupa.png" alt=""></button>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    
+                    <select id="ordenar_por" class="form-select" aria-label="Default select example">
+                        <option selected>Ordenar por</option>
+                        <option value="1">Nombre</option>
+                        <option value="2">Importancia</option>
+                        <option value="3">Fecha de creacion</option>
+                    </select>
+                </div>
+            </div>
             <div  id="task_container" class="row">
               
             </div>
