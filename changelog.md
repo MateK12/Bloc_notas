@@ -1,6 +1,12 @@
 Change Log
 
 				     Bloc de notas
+10/08/2023
+-Agregado
+Validador para saber si el campo de busqueda de tarea esta vacio
+-Arreglado
+Se permite tener 2 tareas con el mismo nombre y/o descripcion
+Formateo de fecha en el front
 4/08/2023
 Agregado
 -Cuando busca una tarea y no encuentra nada, muestra una alerta

@@ -24,7 +24,9 @@ Editar_Tarea_Redireccion(localStorage.getItem("tarea_editandose"));
 
 
 //Editar la tarea
-
+function VolverDashboard() {
+    window.location.href = "Dashboard.html"
+}
 async function Editar_Tarea() {
     let API = "http://127.0.0.1:5000";
     let id = localStorage.getItem("tarea_editandose");

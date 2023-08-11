@@ -219,7 +219,7 @@ def EnviarCodigo():
     asunto = "Codigo de confirmacion"
     mensaje = 'Subject:{}\n\n{}'.format(asunto,cuerpo)
     server = smtplib.SMTP("smtp.gmail.com",587)
-    server.starttls()
+    server.starttls() 
     server.login("m.kristich@alumno.etec.um.edu.ar","mket3024")
     server.sendmail("m.kristich@gmail.com",request.json["usuario_value"],mensaje)
     msg = {"exito":"Envio exitoso"}

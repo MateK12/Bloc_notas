@@ -57,16 +57,19 @@ async function Obtener_tareas(id) {
   localStorage.setItem("tareas",res);
   if (res.creacion) {
     for (let i = 0; i < res.nombre.length; i++) {
+    let formatearFecha = res.fecha[i].slice(5,16);
+    console.log(formatearFecha)
     let obj_tarea = {
         titulo:res.nombre[i],
         descripcion:res.descripcion[i],
         importancia:res.importancia[i],
-        fecha:res.fecha[i],
+        fecha:formatearFecha,
         id:res.id[i]
       }
     tareas.push(obj_tarea)
-    create_task(res.nombre[i],res.descripcion[i],res.importancia[i],res.fecha[i],res.id[i]);  
+    create_task(res.nombre[i],res.descripcion[i],res.importancia[i],formatearFecha,res.id[i]);  
     }
+    console.log(res.fecha)
     id_ultima_tarea =  res.id[res.id.length -1];
     localStorage.setItem("id_tarea",id_ultima_tarea);
     console.log(id_ultima_tarea);
