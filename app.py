@@ -222,7 +222,7 @@ def EnviarCodigo():
     server.starttls() 
     server.login("m.kristich@alumno.etec.um.edu.ar","mket3024")
     server.sendmail("m.kristich@gmail.com",request.json["usuario_value"],mensaje)
-    msg = {"exito":"Envio exitoso"}
+    msg = {"exito":True}
     server.quit()
     print(mensaje)
     return msg

@@ -67,6 +67,20 @@ input[type="text"], input[type="password"] {
 	cursor: pointer;
 	transition: background-color 0.3s ease;
 }
+#boton_submit{
+	background-color: #4CAF50;
+	color: rgb(0, 0, 0);
+	font-size: 1.3rem;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+#boton_submit{
+	background-color: #3e8e41;
+
+}
 input[type="submit"] {
 	background-color: #4CAF50;
 	color: rgb(0, 0, 0);
