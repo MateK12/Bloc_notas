@@ -1,6 +1,13 @@
 Change Log
 
 				     Bloc de notas
+18/08/2023
+-Agregado
+Mensaje en caso de que el codigo sea invalido
+Cracion de ruta para cambiar contraseña
+Formulario para cambiar contraseña
+-Arreglado
+Estilos del formulario para validar codigo y cambiar contraseña
 10/08/2023
 -Agregado
 Validador para saber si el campo de busqueda de tarea esta vacio

@@ -113,3 +113,26 @@ a{
 		height: 400px;
 	}
   }
+
+#BtnValidarCodigo{
+
+}
+.btnGreen{
+	background-color: #4CAF50;
+	color: rgb(0, 0, 0);
+	font-size: 1.3rem;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+.btnGreen:hover{
+	background-color: #3e8e41;
+
+}
+#contRecuperar{
+	align-items: center;
+	text-align: center;
+
+}

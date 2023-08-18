@@ -256,6 +256,11 @@ def TraerTareaPorNombre():
             
         }
         return msg
+@app.route("/CambiarContraseña",methods = ["GET","POST"])
+def CambiarContraseña():
+    EncontrarUser = sesion1.query(Tarea).filter(Tarea.usuario == request.json["mail"]).first()
+    print("Se encontro esto" + EncontrarUser)
+    #Opracion PUT
 if __name__ == '__main__':
     # base.metadata.drop_all(motor)
     # base.metadata.create_all(motor)
