@@ -1,6 +1,16 @@
 Change Log
 
 				     Bloc de notas
+
+24/08/2023
+-Arreglado
+Redireccion al dashboard, en la seccion de editar tarea
+Ruta post de editar tarea
+-Agregado
+Hasheo de nueva contraseña
+Actualizar la contraseña
+Enviar mensaje de exito
+Rueda de carga (en proceso)	
 18/08/2023
 -Agregado
 Mensaje en caso de que el codigo sea invalido

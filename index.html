@@ -3,11 +3,15 @@
 <head>
 	<title> Iniciar sesion</title>
 	<link rel="stylesheet" type="text/css" href="./styles/index.css">
+	<link rel="stylesheet" href="./styles/loader.css">
 	<link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
 </head>
 <body>
 	<div class="container">
 		<h1>Inicio de sesion</h1>
+		<span style="width: 20px;height: 20px;" id="contenedor">
+			<div class="loader" id="loader">Loading...</div>
+		</span>
 		<form>
 			<h3 id="mensaje"></h3>
 			<label for="username">Email:</label>

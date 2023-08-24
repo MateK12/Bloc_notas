@@ -27,9 +27,12 @@ btnSubmit.addEventListener("click",(e)=>{
             cont.innerHTML = `
             <br>
 
-            <label for="usuario">Ingrese el codigo</label>
+            <h3 for="usuario">Ingrese el codigo</h3>
+            <br>
+            <label for="inputCodigo">El codigo fue enviado a: ${email}</label>
             <br>
             <br>
+
 
 
             <input type="text" id="inputCodigo" name="username" required>
@@ -68,7 +71,33 @@ function ValidarCodigo() {
             `
   }
 }
-function CambiarContraseña() {
+async function CambiarContraseña() {
   let nuevaContraseña = document.getElementById("inputNuevaContraseña");
-  console.log(email);
+  const cambiarContraseña = await fetch(`${API}/CambiarContraseña`,{
+    mode:'cors',
+      method:["POST"],
+      headers:{"Content-Type":"application/json"
+    },
+    body: JSON.stringify ({
+      mail:email,
+      nuevaContraseña:nuevaContraseña.value
+
+    })
+    })
+res = await cambiarContraseña.json();
+if (res.exito) {
+  cont.innerHTML = `
+  <br>
+  <br>
+  <h4>Contraseña cambiada con exito</h4>
+  <br><br>
+  <label for="">Redirigiendo...</label>
+
+  `
+  
+  setTimeout(()=>{
+    window.location.href = "../../index.html"
+  },5000)      
+}
+
 }

@@ -200,6 +200,7 @@ def Editar_Tarea():
             Tarea.descripcion: request.json["descripcion_post"],
             Tarea.importancia: request.json["importancia_post"]
         })
+    print(obtener_tarea)
     msg = {
             "mensaje":"tarea Editada",
         }
@@ -258,8 +259,11 @@ def TraerTareaPorNombre():
         return msg
 @app.route("/CambiarContraseña",methods = ["GET","POST"])
 def CambiarContraseña():
-    EncontrarUser = sesion1.query(Tarea).filter(Tarea.usuario == request.json["mail"]).first()
-    print("Se encontro esto" + EncontrarUser)
+    print(request.json["nuevaContraseña"])
+    hashed_psswd = Contetxo.hash(request.json["nuevaContraseña"]) 
+    print(hashed_psswd)
+    EncontrarUser = sesion1.query(User).filter(User.usuario == request.json["mail"]).update({User.contraseña:hashed_psswd})
+    return ({"exito":True})
     #Opracion PUT
 if __name__ == '__main__':
     # base.metadata.drop_all(motor)
