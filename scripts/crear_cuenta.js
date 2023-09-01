@@ -18,17 +18,33 @@ boton.addEventListener("click",async function  handle_submit(e) {
     let res = await UsuarioExiste.json();
     console.log(res)
     if (res.existencia) {
-      mensaje.innerHTML = "La cuenta ya existe"
+      let loaderCont = document.getElementById("loaderCont");
+      loaderCont.innerHTML = `<div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>`
       setTimeout(()=>{
-        window.location.href = "../index.html"
-      },5000)
+        mensaje.innerHTML = "La cuenta ya existe, redirigiendo ...";
+        setTimeout(() => {
+          window.location.href = "../index.html"
+
+        }, 2000);
+      },3000)
     }if (res.existencia == false) {
+      let loaderCont = document.getElementById("loaderCont");
+      loaderCont.innerHTML = `<div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>`
       usuario_value = usuario.value;
       let contraseña_value = contrasena.value;
       localStorage.setItem("usuarioAgregar",usuario_value);
       localStorage.setItem("contraseñaAgreagar",contraseña_value);
       console.log(usuario_value);
-      window.location.href="../templates/confirmacion.html"
+      setTimeout(()=>{
+        mensaje.innerHTML = "redirigiendo ..."
+        setTimeout(() => {
+          window.location.href="../templates/confirmacion.html"
+        }, 2000);
+      },3000)
     }
     
   })

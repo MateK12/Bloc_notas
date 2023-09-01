@@ -264,7 +264,6 @@ def CambiarContraseña():
     print(hashed_psswd)
     EncontrarUser = sesion1.query(User).filter(User.usuario == request.json["mail"]).update({User.contraseña:hashed_psswd})
     return ({"exito":True})
-    #Opracion PUT
 if __name__ == '__main__':
     # base.metadata.drop_all(motor)
     # base.metadata.create_all(motor)

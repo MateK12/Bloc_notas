@@ -1,7 +1,14 @@
 Change Log
 
 				     Bloc de notas
-
+1/09/2023
+-Arreglado
+Ya no muestra mensaje de error anterior una vez que se vuelve a enviar el form en index
+-Agregado
+Crear css del icono de carga
+Icono de carga en los tres posibles estados en index 
+Icono de carga en los 2 posibles estados en crear cuenta
+SetTimeOut() en estas pantallas para mejorar la experiencia
 24/08/2023
 -Arreglado
 Redireccion al dashboard, en la seccion de editar tarea

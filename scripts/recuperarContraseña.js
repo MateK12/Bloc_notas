@@ -24,22 +24,34 @@ btnSubmit.addEventListener("click",(e)=>{
         res = await respuesta.json();
         console.log(res);
         if (res.exito == true) {
-            cont.innerHTML = `
-            <br>
+          let loaderCont = document.getElementById("loaderCont");
+        loaderCont.innerHTML = `<div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>`
+        setTimeout(() => {
+          loaderCont.innerHTML = ` `
+          cont.innerHTML = `
+          <br>
 
-            <h3 for="usuario">Ingrese el codigo</h3>
-            <br>
-            <label for="inputCodigo">El codigo fue enviado a: ${email}</label>
-            <br>
-            <br>
+          <h3 for="usuario">Ingrese el codigo</h3>
+          <br>
+          <div id="loaderCont" class="loader">
+          </div>
+         <br>
+
+          <label for="inputCodigo">El codigo fue enviado a: ${email}</label>
+          <br>
+          <br>
 
 
 
-            <input type="text" id="inputCodigo" name="username" required>
-            <br>
+          <input type="text" id="inputCodigo" name="username" required>
+          <br>
 
-            <input class="btnGreen" onclick=ValidarCodigo() type="button" id="boton_submit" value="Validar">
-            `
+          <input class="btnGreen" onclick=ValidarCodigo() type="button" id="boton_submit" value="Validar">
+          `
+        }, 3000);
+         
 
         }
         
@@ -47,28 +59,45 @@ btnSubmit.addEventListener("click",(e)=>{
     Enviar_Mail()
 })
 function ValidarCodigo() {
-  let code = document.getElementById("inputCodigo")
+  let code = document.getElementById("inputCodigo");
+  let loaderCont = document.getElementById("loaderCont");
+  loaderCont.innerHTML = `<div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>`
   if (code.value == codigo) {
-    cont.innerHTML = `<label for="usuario">Usuario verificado con exito</label>
-            <br>
-            <br>
+    setTimeout(() => {
+      loaderCont.innerHTML = ` `
+      cont.innerHTML = `<label for="usuario">Usuario verificado con exito</label>
+      <br>
+      <br>
 
+      <div id="loaderCont" class="loader">
+      </div>
+      <input type="password" id="inputNuevaContraseña" name="username" required>
+      <br>
 
-            <input type="password" id="inputNuevaContraseña" name="username" required>
-            <br>
+      <input class="btnGreen" onclick=CambiarContraseña() type="button" id="BtnValidarCodigo" value="Cambiar contraseña">
+      `
+    }, 3000);
 
-            <input class="btnGreen" onclick=CambiarContraseña() type="button" id="BtnValidarCodigo" value="Cambiar contraseña">
-            `
   }else{
-    cont.innerHTML = `
+    
+    setTimeout(() => {
+      cont.innerHTML = `
             <br>
             <br>
             <h4>El codigo es incrorrecto, intente de nuevo</h4>
+            <br>
+
+            <div id="loaderCont" class="loader">
+            </div>
             <br>
             <input type="text" id="inputCodigo" name="username" required>
             <br>
             <input class="btnGreen" onclick=ValidarCodigo() type="button" id="boton_submit" value="Validar">
             `
+    }, 2000);
+    
   }
 }
 async function CambiarContraseña() {
@@ -86,11 +115,20 @@ async function CambiarContraseña() {
     })
 res = await cambiarContraseña.json();
 if (res.exito) {
+  let loaderCont = document.getElementById("loaderCont");
+      loaderCont.innerHTML = `<div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>`
   cont.innerHTML = `
+
   <br>
   <br>
   <h4>Contraseña cambiada con exito</h4>
-  <br><br>
+  <br>
+  
+  <div id="loaderCont" class="loader">
+  </div>
+  <br>
   <label for="">Redirigiendo...</label>
 
   `

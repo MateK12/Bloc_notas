@@ -5,22 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/loader.css">
     <title>Recuperar contraseña</title>
 </head>
 <body>
 <header>
 </header>
     <main>
-        <div id="contRecuperar" class="container text-center">
-            <h1>Recuperar contraseña</h1>
-            <form>
-                <h3 id="mensaje"></h3>
-                <label for="usuario">Email:</label>
-                <input type="text" id="usuario" name="username" required>
-                <input type="button" id="boton_submit" value="Recuperar contraseña">
-            </form>
-        <br>
-        <a href="../index.html">Volver al inicio de sesion</a>
+        <div>
+           
+            <div id="contRecuperar" class="container text-center">
+                <h1>Recuperar contraseña</h1>
+
+                <form >
+                    <div id="loaderCont" class="loader">
+                    </div>
+                    <h3 id="mensaje"></h3>
+                    <label for="usuario">Email:</label>
+                    <input type="text" id="usuario" name="username" required>
+                    <input type="button" id="boton_submit" value="Recuperar contraseña">
+                </form>
+            <br>
+            <a href="../index.html">Volver al inicio de sesion</a>
+            </div>
         </div>
     </main>
     <footer>
