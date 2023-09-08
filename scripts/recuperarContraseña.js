@@ -67,13 +67,17 @@ function ValidarCodigo() {
   if (code.value == codigo) {
     setTimeout(() => {
       loaderCont.innerHTML = ` `
-      cont.innerHTML = `<label for="usuario">Usuario verificado con exito</label>
+      cont.innerHTML = `<h3 for="usuario">Usuario verificado con exito</h3>
       <br>
       <br>
-
+      <label for="">
+      Ingrese su nueva contraseña
+      </label>
+      <br>
+      <br>
       <div id="loaderCont" class="loader">
       </div>
-      <input type="password" id="inputNuevaContraseña" name="username" required>
+      <input type="password" id="inputNuevaContraseña" name="username" placeholder="" required>
       <br>
 
       <input class="btnGreen" onclick=CambiarContraseña() type="button" id="BtnValidarCodigo" value="Cambiar contraseña">
