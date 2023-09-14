@@ -5,7 +5,7 @@ let tareas = []
 let ordenar_Select = document.getElementById("ordenar_por");
 let task_container = document.getElementById("task_container");
 let boton_add = document.getElementById("btn_add");
-
+let loaderCont = document.getElementById("loaderCont");
 function create_task(titulo,descripcion ,importancia,fecha = "ahora",id=localStorage.getItem("id_usuario")+1) {
   
     let container = document.createElement("div");
@@ -35,6 +35,7 @@ function create_task(titulo,descripcion ,importancia,fecha = "ahora",id=localSto
   </div> <br>`
   container.className = "col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12";  
   task_container.appendChild(container);
+  
  }
 boton_add.addEventListener("click",create_task);
 
@@ -107,7 +108,12 @@ btn_VM.addEventListener("click",async function  handle_submit(e) {  //Crear tare
     console.log(res);
     create_task(nombre,descripcion,importancia)
     setTimeout(()=>{
-      window.location.reload()
+      loaderCont.innerHTML = `<div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>`;
+      setTimeout(()=>{
+        window.location.reload();
+      },1000)
       },500)
   }
   

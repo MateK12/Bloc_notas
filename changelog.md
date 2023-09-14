@@ -1,6 +1,9 @@
 Change Log
 
 				     Bloc de notas
+14/09/23
+-Agregado
+Loader en crear tarea
 1/09/2023
 -Arreglado
 Ya no muestra mensaje de error anterior una vez que se vuelve a enviar el form en index
