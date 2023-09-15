@@ -32,7 +32,9 @@ btnSubmit.addEventListener("click",(e)=>{
           loaderCont.innerHTML = ` `
           cont.innerHTML = `
           <br>
-
+          <div style="justify-content: center; align-items: center; text-align: center; height: fit;">
+                    <img src="../assets/Icono.png" alt="">
+                </div>
           <h3 for="usuario">Ingrese el codigo</h3>
           <br>
           <div id="loaderCont" class="loader">
@@ -67,7 +69,11 @@ function ValidarCodigo() {
   if (code.value == codigo) {
     setTimeout(() => {
       loaderCont.innerHTML = ` `
-      cont.innerHTML = `<h3 for="usuario">Usuario verificado con exito</h3>
+      cont.innerHTML = `
+      <div style="justify-content: center; align-items: center; text-align: center; height: fit;">
+                    <img src="../assets/Icono.png" alt="">
+                </div>
+      <h3 for="usuario">Usuario verificado con exito</h3>
       <br>
       <br>
       <label for="">
@@ -90,6 +96,9 @@ function ValidarCodigo() {
       cont.innerHTML = `
             <br>
             <br>
+            <div style="justify-content: center; align-items: center; text-align: center; height: fit;">
+                    <img src="../assets/Icono.png" alt="">
+                </div>
             <h4>El codigo es incrorrecto, intente de nuevo</h4>
             <br>
 
@@ -126,11 +135,16 @@ if (res.exito) {
   cont.innerHTML = `
 
   <br>
-  <br>
+  <div style="justify-content: center; align-items: center; text-align: center; height: fit;">
+                    <img src="../assets/Icono.png" alt="">
+                </div>
   <h4>Contraseña cambiada con exito</h4>
   <br>
   
   <div id="loaderCont" class="loader">
+  <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
   </div>
   <br>
   <label for="">Redirigiendo...</label>

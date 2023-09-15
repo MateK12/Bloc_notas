@@ -1,7 +1,18 @@
 Change Log
 
 				     Bloc de notas
-14/09/23
+15/09/2023
+-Agregado
+Loader en recuperar contraseña, validar codigo y cambiar contraseña
+Mail propio de la pagina
+Favicons en todas las paginas
+Nombre de app "bloceros" (cambiable)
+Iconos en todos los formularios importantes
+-Arreglado
+Cambio de icono
+Redireccion al dashboard en editar tarea
+Mejorar estilo del formulario
+14/09/2023
 -Agregado
 Loader en crear tarea
 1/09/2023

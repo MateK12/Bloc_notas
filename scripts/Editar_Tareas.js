@@ -2,7 +2,7 @@ let btn_editar = document.getElementById("btn_editar");
 let titulo = document.getElementById("titulo");
 let importancia = document.getElementById("Importancia");
 let descripcion = document.getElementById("descripcion");
-
+let loaderCont = document.getElementById("loaderCont");
 //Obtener tarea a editar de la DB
 async function Editar_Tarea_Redireccion(id) {
     let API = "http://127.0.0.1:5000";
@@ -24,9 +24,7 @@ Editar_Tarea_Redireccion(localStorage.getItem("tarea_editandose"));
 
 
 //Editar la tarea
-function VolverDashboard() {
-    window.location.href = "Dashboard.html"
-}
+
 async function Editar_Tarea() {
     let API = "http://127.0.0.1:5000";
     let id = localStorage.getItem("tarea_editandose");
@@ -43,9 +41,14 @@ async function Editar_Tarea() {
             importancia_post
         })  
     })
-    let res = await respuesta.json();
-    console.log(res);
-    titulo.innerHTML = res.nombre;  
-    descripcion.innerHTML = res.descripcion;
+    loaderCont.innerHTML = ` <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>`
+    setTimeout( async()=>{
+        let res = await respuesta.json();
+        console.log(res);
+        titulo.innerHTML = res.nombre;  
+        descripcion.innerHTML = res.descripcion;
+    },2000)
         }
 btn_editar.addEventListener("click",Editar_Tarea);
